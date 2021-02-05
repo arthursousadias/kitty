@@ -1,3 +1,10 @@
+/*******************************************************************
+ * Objetivo : Projeto de um pequeno carrinho controlado pelo Arduino
+ * através de um celular utilizando um APP em java.
+ * Desenvolvido por : Arthur Dias
+ * Data de início : 04/02/2021
+ * *****************************************************************/
+
 #include <Arduino.h>
 #include <SPI.h>
 #include <Servo.h>
