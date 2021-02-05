@@ -4,6 +4,7 @@ int IN1 = 10;
 int IN2 = 11;
 int IN3 = 12;
 int IN4 = 13;
+bool luzes = false;
 
 /***Protótipos as funções***/
 void escrever();
@@ -12,6 +13,8 @@ void re();
 void esquerda();
 void direita();
 void freio();
+void controleServo();
+void acenderLuzes();
 
 void setup()
 {
@@ -59,7 +62,15 @@ void escrever()
         esquerda();
         Serial.println("esquerda");
         break;
-      }     
+      case '5':
+        acenderLuzes();
+        Serial.println("luz");
+        break;
+      case '6':
+        freio();
+        Serial.println("freio");
+        break;
+      }        
     }
     c = Serial.read();
   }
@@ -96,7 +107,6 @@ void direita()
 
 void esquerda()
 {
-
   //Para o motor B
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, HIGH);
@@ -113,4 +123,17 @@ void freio()
   //Para o motor B
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, HIGH);
+}
+
+void acenderLuzes() {
+  if (!luzes)
+  {
+    /* Acende a luz */
+    Serial.println("Luz Acessa");
+    luzes = true;
+  }else{
+        Serial.println("Luz Apagada");
+        luzes = false;
+  }
+  
 }
