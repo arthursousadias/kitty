@@ -28,11 +28,11 @@ void setup()
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
+  pinMode(luzesPin, OUTPUT);
 }
 
 void loop()
-{
-  digitalWrite(9, HIGH);
+{  
   escrever();
 }
 
@@ -133,10 +133,12 @@ void acenderLuzes() {
   {
     /* Acende a luz */
     Serial.println("Luz Acessa");
+    digitalWrite(luzesPin, HIGH);
     luzes = true;
   }else{
     Serial.println("Luz Apagada");
     luzes = false;
+    digitalWrite(luzesPin, LOW);
   }  
 }
 
