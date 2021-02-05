@@ -1,10 +1,14 @@
 #include <Arduino.h>
 #include <SPI.h>
+#include <Servo.h>
 int IN1 = 10;
 int IN2 = 11;
 int IN3 = 12;
 int IN4 = 13;
+int servoPin = 5;
+int luzesPin = 9;
 bool luzes = false;
+Servo servo;
 
 /***Protótipos as funções***/
 void escrever();
@@ -13,16 +17,12 @@ void re();
 void esquerda();
 void direita();
 void freio();
-void controleServo();
+void controleServo(int graus);
 void acenderLuzes();
 
 void setup()
 {
-  pinMode(3, OUTPUT);
-  pinMode(9, OUTPUT);
-  digitalWrite(3, HIGH);
-  pinMode(2, OUTPUT);
-  digitalWrite(2, LOW);
+  servo.attach(servoPin);
   Serial.begin(9600);
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
@@ -48,23 +48,26 @@ void escrever()
       {
       case '1':
         frente();
+        controleServo(90);
         Serial.println("Frente");
         break;
       case '2':
+        controleServo(90);
         re();
         Serial.println("ré");
         break;
       case '3':
         direita();
+        controleServo(20);
         Serial.println("direita");
         break;
       case '4':
+       controleServo(160);
         esquerda();
         Serial.println("esquerda");
         break;
       case '5':
         acenderLuzes();
-        Serial.println("luz");
         break;
       case '6':
         freio();
@@ -132,8 +135,11 @@ void acenderLuzes() {
     Serial.println("Luz Acessa");
     luzes = true;
   }else{
-        Serial.println("Luz Apagada");
-        luzes = false;
-  }
-  
+    Serial.println("Luz Apagada");
+    luzes = false;
+  }  
+}
+
+void controleServo(int graus){
+  servo.write(graus);
 }
